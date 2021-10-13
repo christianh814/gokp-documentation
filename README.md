@@ -29,8 +29,15 @@ export PATH=$GOBIN:$PATH
 
 If you don't want to build you can download binary
 
+**Linux**
+
 ```
-sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v.0.0.1/gokp
+sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v.0.0.1/gokp-amd64-linux
+```
+
+**Mac OSX x86_64**
+```
+sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v.0.0.1/gokp-amd64-macosx
 ```
 
 Make sure to make it executable
