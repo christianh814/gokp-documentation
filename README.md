@@ -9,10 +9,11 @@ GOKP aims to be a GitOps native Kubernetes Platform. You can read more at the ab
 # Getting The Binary
 
 I've hand tested this on Ubuntu 21.04, Fedora 34, and Mac OS X Big
-Sur (11.6) all on X86_64.
+Sur (11.6) all on X86_64. However, since this is a PoC, YMMV.
 
-I currently don't have any binaries, so you will need to install
-this via golang (I'm using 1.17.1):
+## Build From Source
+
+If you want to build from source...
 
 ```shell
 go install github.com/christianh814/gokp
@@ -24,7 +25,23 @@ If you don't have your `GOBIN` in your `PATH`, you need to set that
 export PATH=$GOBIN:$PATH
 ```
 
-Now you can get bash completion.
+## Download
+
+If you don't want to build you can download binary
+
+```
+sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v.0.0.1/gokp
+```
+
+Make sure to make it executable
+
+```
+sudo chmod +x /usr/local/bin/gokp
+```
+
+## Bash Completion
+
+Now that you have the `gokp` clit, you can get bash completion.
 
 ```shell
 source <(gokp completion bash)
