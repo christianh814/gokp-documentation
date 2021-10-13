@@ -92,6 +92,84 @@ This is deployed via the Git repo it created, so check your account. Any changes
 
 > NOTE: You might see some things "out of sync". The YAML Exporter is currently "best effort" so you may have to do some editing in your Git repo
 
+# Adding Workloads
+
+To add a workload, you can use the repo saved under `~/.gokp/$MYCLUSTER/$MYCLUSTER`.
+
+> Or you can just `git clone` it to another directory if you wish.
+
+```
+$ cd ~/.gokp/$MYCLUSTER/$MYCLUSTER
+```
+
+There is a sample of what you can do under `cluster/tenants`.
+
+```shell
+$ ls -1 cluster/tenants/
+kuard
+```
+
+Create your workload in this directory with all the needed artifacts.
+For example, to deploy NGINX sample workload. You would first create
+the directory.
+
+```shell
+mkdir cluster/tenants/nginx
+```
+
+Then I would create the YAML files for NGINX in this new directory. First the namespace.
+
+```shell
+kubectl create ns nginx \
+--dry-run=client -o yaml > cluster/tenants/nginx/nginx-ns.yaml
+```
+
+Next the deployment.
+
+```shell
+kubectl create deployment nginx -n nginx --image=nginx \
+--dry-run=client -o yaml > cluster/tenants/nginx/nginx-deploy.yaml
+```
+
+Then the service.
+
+```shell
+kubectl create service clusterip nginx --tcp=80:8080 -n nginx \
+-o yaml --dry-run=client > cluster/tenants/nginx/nginx-svc.yaml
+```
+
+> Optionally, you can also create your `Kustomization` files here.
+
+Commit these to your repo.
+
+```shell
+git add .
+git commit -am "added new application"
+git push
+```
+
+In a few minutes you should see your application running on the cluster.
+
+```shell
+$ kubectl get application nginx -n argocd
+NAME    SYNC STATUS   HEALTH STATUS
+nginx   Synced        Healthy
+```
+
+Workload is on the cluster now.
+
+```shell
+kubectl get deploy,svc,pods -n nginx
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           60s
+
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/nginx   ClusterIP   10.131.140.13   <none>        80/TCP    60s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/nginx-6799fc88d8-77tmk   1/1     Running   0          59s
+```
+
 # Cleaning Up
 
 To delete your cluster just run the following.
