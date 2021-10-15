@@ -13,6 +13,8 @@ At a minimum:
 
 Podman may or maynot work. It's [considered experemental by KIND](https://kind.sigs.k8s.io/docs/user/rootless/#creating-a-kind-cluster-with-rootless-podman) so YMVM.
 
+Linux users should take note about [too many open files](https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files) issue, as you'll need to configure this.
+
 # Installing the Cluster
 
 After you have [gotten the binary](../README.md#getting-the-binary), you can run the `create-cluster` command. You will need your GitHub token.
