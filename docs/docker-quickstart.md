@@ -3,8 +3,6 @@
 The following guide will install a GOKP cluster on your local machine using docker.
 Please read the entire guide before attempting and install.
 
-> :rotating_light: *KNOWN ISSUE* - `gokp` using Mac and Docker does not work due to a known [CAPD issue](https://github.com/christianh814/gokp/issues/2)
-
 # Prerequisites
 
 The following are preqs. Since this is centered around [KIND](https://kind.sigs.k8s.io/) and [CAPI](https://cluster-api.sigs.k8s.io/), there will be a lot of similar prereqs. I recommend reading over them.

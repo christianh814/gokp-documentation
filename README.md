@@ -9,11 +9,11 @@ GOKP aims to be a GitOps native Kubernetes Platform. You can read more at the ab
 # Getting The Binary
 
 I've hand tested this on Ubuntu 21.04, Fedora 34, and Mac OS X Big
-Sur (11.6) all on X86_64. However, since this is a PoC, YMMV.
+Sur (11.6) all on **X86_64**. However, since this is a PoC, YMMV.
 
 ## Build From Source
 
-If you want to build from source...
+If you want to build from source (built on go1.17.1)...
 
 ```shell
 go install github.com/christianh814/gokp
@@ -32,12 +32,12 @@ If you don't want to build you can download binary
 **Linux**
 
 ```
-sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v.0.0.1/gokp-amd64-linux
+sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v0.0.2/gokp-amd64-linux
 ```
 
 **Mac OSX x86_64**
 ```
-sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v.0.0.1/gokp-amd64-macosx
+sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v0.0.2/gokp-amd64-macosx
 ```
 
 Make sure to make it executable
@@ -48,11 +48,13 @@ sudo chmod +x /usr/local/bin/gokp
 
 ## Bash Completion
 
-Now that you have the `gokp` clit, you can get bash completion.
+Now that you have the `gokp` cli, you can get bash completion.
 
 ```shell
 source <(gokp completion bash)
 ```
+
+> **NOTE:** On Mac OS, you probably want to do `gokp compeltion zsh`
 
 # Questions?
 
