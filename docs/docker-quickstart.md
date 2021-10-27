@@ -24,7 +24,8 @@ gokp development-cluster \
 --cluster-name=$MYCLUSTER --github-token=$GH_TOKEN
 ```
 
-> NOTE: A private repo will commit your GitHub Token to the repo. If you don't want this set `--private-repo` to `false`
+> NOTE: A private repo will commit your GitHub Token to the repo. If you don't want this set `--private-repo` to `false`. Also
+> the default development cluster only installs 1 master and 2 nodes. To simulate an HA environment set `--ha` to `true`.
 
 After about 40 min you should have a cluster ready to go. You'll have some information.
 
