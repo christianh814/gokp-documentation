@@ -29,7 +29,8 @@ gokp create-cluster --cluster-name=$MYCLUSER \
 --private-repo=true
 ```
 
-> NOTE: A private repo will commit your GitHub Token to the repo. If you don't want this set `--private-repo` to `false`
+> NOTE: A private repo will commit your GitHub Token to the repo. If you don't want this set `--private-repo` to `false`. Also
+> if you're using an AWS account that has already ran the CloudFormation step, you can pass `--skip-cloud-formation` to skip it.
 
 After about 40 min you should have a cluster ready to go. You'll have some information.
 
