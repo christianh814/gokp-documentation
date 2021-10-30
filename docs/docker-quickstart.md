@@ -20,7 +20,7 @@ Linux users should take note about [too many open files](https://kind.sigs.k8s.i
 After you have [gotten the binary](../README.md#getting-the-binary), you can run the `create-cluster` command. You will need your GitHub token.
 
 ```shell
-gokp development-cluster \
+gokp create-cluster development \
 --cluster-name=$MYCLUSTER --github-token=$GH_TOKEN
 ```
 
@@ -181,7 +181,7 @@ pod/nginx-6799fc88d8-77tmk   1/1     Running   0          59s
 To delete your cluster just run the following.
 
 ```shell
-gokp development-delete \
+gokp delete-cluster development \
 --cluster-name=$MYCLUSTER --kubeconfig=/home/chernand/.gokp/$MYCLUSTER/$MYCLUSTER.kubeconfig
 ```
 

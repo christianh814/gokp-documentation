@@ -21,7 +21,7 @@ Linux users should take note about [too many open files](https://kind.sigs.k8s.i
 After you have [gotten the binary](../README.md#getting-the-binary), you can run the `create-cluster` command. You will need your AWS Access Key, Secret Key, the SSH Keypair to use ([already must exist](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/import-key-pair.html)), and your GitHub token.
 
 ```shell
-gokp create-cluster --cluster-name=$MYCLUSTER \
+gokp create-cluster aws --cluster-name=$MYCLUSTER \
 --github-token=$GH_TOKEN \
 --aws-ssh-key=$AWS_SSH_KEY_NAME \
 --aws-access-key=$AWS_ACCESS_KEY_ID \
@@ -185,7 +185,7 @@ pod/nginx-6799fc88d8-77tmk   1/1     Running   0          59s
 To delete your cluster just run the following.
 
 ```shell
-gokp delete-cluster \
+gokp delete-cluster aws \
 --cluster-name=$MYCLUSTER \
 --kubeconfig=/home/chernand/.gokp/$MYCLUSTER/$MYCLUSTER.kubeconfig
 ```
