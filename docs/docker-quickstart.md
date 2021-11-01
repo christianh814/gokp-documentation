@@ -20,11 +20,12 @@ Linux users should take note about [too many open files](https://kind.sigs.k8s.i
 After you have [gotten the binary](../README.md#getting-the-binary), you can run the `create-cluster` command. You will need your GitHub token.
 
 ```shell
-gokp development-cluster \
+gokp create-cluster development \
 --cluster-name=$MYCLUSTER --github-token=$GH_TOKEN
 ```
 
-> NOTE: A private repo will commit your GitHub Token to the repo. If you don't want this set `--private-repo` to `false`
+> NOTE: A private repo will commit your GitHub Token to the repo. If you don't want this set `--private-repo` to `false`. Also
+> the default development cluster only installs 1 master and 2 nodes. To simulate an HA environment set `--ha` to `true`.
 
 After about 40 min you should have a cluster ready to go. You'll have some information.
 
@@ -180,7 +181,7 @@ pod/nginx-6799fc88d8-77tmk   1/1     Running   0          59s
 To delete your cluster just run the following.
 
 ```shell
-gokp development-delete \
+gokp delete-cluster development \
 --cluster-name=$MYCLUSTER --kubeconfig=/home/chernand/.gokp/$MYCLUSTER/$MYCLUSTER.kubeconfig
 ```
 
