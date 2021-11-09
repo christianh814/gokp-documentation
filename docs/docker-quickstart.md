@@ -102,11 +102,12 @@ This is deployed via the Git repo it created, so check your account. Any changes
 
 To add a workload, you can use the repo saved under `~/.gokp/$MYCLUSTER/$MYCLUSTER`.
 
-> Or you can just `git clone` it to another directory if you wish.
-
-```
+```shell
 $ cd ~/.gokp/$MYCLUSTER/$MYCLUSTER
 ```
+
+> :exclamation: The SSH key used to make commits/pushes is under `~/.gokp/$MYCLUSTER` and it ends with an `_rsa`
+> you will need to add this via `ssh-add` or set the [GIT_SSH_COMMAND](https://git-scm.com/docs/git) environment variable.
 
 There is a sample of what you can do under `cluster/tenants`.
 
