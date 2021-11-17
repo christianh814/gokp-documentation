@@ -29,8 +29,11 @@ gokp create-cluster aws --cluster-name=$MYCLUSTER \
 --private-repo=true
 ```
 
-> NOTE: A private repo will commit your GitHub Token to the repo. If you don't want this set `--private-repo` to `false`. Also
-> if you're using an AWS account that has already ran the CloudFormation step, you can pass `--skip-cloud-formation` to skip it.
+Other options to note:
+
+* `--skip-cloud-formation` - This will skip the CAPA CloudFormation step. Use this if you've already ran that step on the AWS account.
+* `--gitops-controller` - By default this is set to `argocd`, but can also be set to `fluxcd`.
+* `--private-repo` - By default this is set to `true`. Set it to `false` to create a public repo.
 
 After about 40 min you should have a cluster ready to go. You'll have some information.
 
@@ -44,17 +47,11 @@ The Kubeconfig of this cluster is in this directory
 export KUBECONFIG=~/.gokp/$MYCLUSTER/$MYCLUSTER.kubeconfig
 ```
 
-Run `kubectl get pods -A` and you should see ArgoCD pods along with a Kuard smaple application.
+Run `kubectl get pods -A` and you should see a Kuard sample application.
 
 ```
-$ k get pods -A | egrep 'argocd|kuard'
+$ k get pods -A | grep 'kuard'
 NAMESPACE     NAME                                                  READY   STATUS    RESTARTS       AGE
-argocd        argocd-application-controller-0                       1/1     Running   0              4m37s
-argocd        argocd-applicationset-controller-5856984b4c-wj8s8     1/1     Running   0              4m39s
-argocd        argocd-dex-server-64f95f8c77-2wzcj                    1/1     Running   0              4m39s
-argocd        argocd-redis-978c79c75-l9c6p                          1/1     Running   0              4m39s
-argocd        argocd-repo-server-85d6c7c8c4-jqwdz                   1/1     Running   0              4m39s
-argocd        argocd-server-7f86787cf-s5sh9                         1/1     Running   0              4m39s
 kuard         kuard-857f95f9df-99x87                                1/1     Running   0              4m43s
 ```
 
@@ -70,37 +67,12 @@ ip-10-0-77-205.ec2.internal   Ready    <none>                 12m   v1.22.2
 ip-10-0-85-76.ec2.internal    Ready    <none>                 12m   v1.22.2
 ```
 
-Login to your Argo CD instance
+# Verifying Installation
 
-Get the inital admin password
+Verifying installation will depend on which GitOps controller you installed. Select the one that's applicable to you.
 
-```shell
-kubectl get secrets argocd-initial-admin-secret -n argocd  -o jsonpath='{.data.password}' | base64 -d ; echo
-```
-
-Access the Argo CD UI with the following
-
-```shell
-kubectl port-forward service/argocd-server 8080:443 -n argocd
-```
-
-You should be able to access the UI by visiting `http://127.0.0.1:8080`. There you'll see a few `Applications`. You should see one for each namespace. You should also see  one for `argocd` itself and another for `kuard` (a sample application).
-
-This was deployed as `ApplicationSets`, take a look.
-
-```shell
-kubectl get appsets -n argocd
-```
-
-Which then creates `Applications`
-
-```shell
-kubectl get apps -n argocd
-```
-
-This is deployed via the Git repo it created, so check your account. Any changes you want to make should be done via the Git repo.
-
-> NOTE: You might see some things "out of sync". The YAML Exporter is currently "best effort" so you may have to do some editing in your Git repo
+* [Argo CD](argo)
+* [Flux CD](flux)
 
 # Adding Workloads
 
@@ -159,15 +131,7 @@ git commit -am "added new application"
 git push
 ```
 
-In a few minutes you should see your application running on the cluster.
-
-```shell
-$ kubectl get application nginx -n argocd
-NAME    SYNC STATUS   HEALTH STATUS
-nginx   Synced        Healthy
-```
-
-Workload is on the cluster now.
+In a few minutes you should see that your workload is on the cluster now.
 
 ```shell
 kubectl get deploy,svc,pods -n nginx
