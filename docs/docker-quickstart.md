@@ -62,6 +62,13 @@ mycluster-md-0-5657887c77-8g5ph   Ready    <none>                 6m36s   v1.22.
 mycluster-md-0-5657887c77-xj728   Ready    <none>                 6m36s   v1.22.1
 ```
 
+# Verifying Installation
+
+Verifying installation will depend on which GitOps controller you installed. Select the one that's applicable to you.
+
+* [Argo CD](argo)
+* [Flux CD](flux)
+
 # Adding Workloads
 
 To add a workload, you can use the repo saved under `~/.gokp/$MYCLUSTER/$MYCLUSTER`.

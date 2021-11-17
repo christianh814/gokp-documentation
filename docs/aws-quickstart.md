@@ -67,6 +67,13 @@ ip-10-0-77-205.ec2.internal   Ready    <none>                 12m   v1.22.2
 ip-10-0-85-76.ec2.internal    Ready    <none>                 12m   v1.22.2
 ```
 
+# Verifying Installation
+
+Verifying installation will depend on which GitOps controller you installed. Select the one that's applicable to you.
+
+* [Argo CD](argo)
+* [Flux CD](flux)
+
 # Adding Workloads
 
 To add a workload, you can use the repo saved under `~/.gokp/$MYCLUSTER/$MYCLUSTER`. 
