@@ -54,7 +54,7 @@ Now that you have the `gokp` cli, you can get bash completion.
 source <(gokp completion bash)
 ```
 
-> **NOTE:** On Mac OS, you probably want to do `gokp compeltion zsh`
+> **NOTE:** On Mac OS, you probably want to do `gokp completion zsh`
 
 # Questions?
 
