@@ -1,6 +1,6 @@
-# AWS Quickstart
+# Azure Quickstart
 
-The following guide will install a GOKP cluster on your AWS Account.
+The following guide will install a GOKP cluster on your Azure Account.
 Please read the entire guide before attempting and install.
 
 # Prerequisites
@@ -8,30 +8,37 @@ Please read the entire guide before attempting and install.
 The following are preqs. Since this is centered around [KIND](https://kind.sigs.k8s.io/) and [CAPI](https://cluster-api.sigs.k8s.io/), there will be a lot of similar prereqs. I recommend reading over them.
 
 At a minimum:
-* AWS Account ([IAM Prereqs](https://cluster-api-aws.sigs.k8s.io/topics/iam-permissions.html#ec2-provisioned-kubernetes-clusters))
+* Azure Account ([Prereqs For Azure](https://capz.sigs.k8s.io/topics/getting-started.html#prerequisites))
 * [GitHub Token](github-token.md)
 * Docker on your workstation
 
 Podman may or maynot work. It's [considered experemental by KIND](https://kind.sigs.k8s.io/docs/user/rootless/#creating-a-kind-cluster-with-rootless-podman) so YMVM.
 
+Please make sure these are met before proceeding.
+
 # Installing the Cluster
 
-After you have [gotten the binary](../README.md#getting-the-binary), you can run the `create-cluster` command. You will need your AWS Access Key, Secret Key, the SSH Keypair to use ([already must exist](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/import-key-pair.html)), and your GitHub token.
+After you have [gotten the binary](../README.md#getting-the-binary), you can run the `create-cluster` command. You will need the following from Azure beforehand:
+
+* Azure App ID
+* Azure App Secret
+* Azure Subscription ID
+* Azure Tenant ID
 
 ```shell
-gokp create-cluster aws --cluster-name=$MYCLUSTER \
+gokp create-cluster azure --cluster-name=$MYCLUSTER \
 --github-token=$GH_TOKEN \
---aws-ssh-key=$AWS_SSH_KEY_NAME \
---aws-access-key=$AWS_ACCESS_KEY_ID \
---aws-secret-key=$AWS_SECRET_ACCESS_KEY \
---private-repo=true
+--azure-app-id=$AZURE_APP_ID \
+--azure-app-secret=$AZURE_APP_SECRET \
+--azure-subscription-id=$AZURE_SUB_ID \
+--azure-tenant-id=$AZURE_TENNANT_ID
 ```
 
 Other options to note:
 
-* `--skip-cloud-formation` - This will skip the CAPA CloudFormation step. Use this if you've already ran that step on the AWS account.
 * `--gitops-controller` - By default this is set to `argocd`, but can also be set to `fluxcd`.
 * `--private-repo` - By default this is set to `true`. Set it to `false` to create a public repo.
+* `--azure-region` - Set this to the region you'd like to install to. By defualt this is set to `westus2`.
 
 After about 40 min you should have a cluster ready to go. You'll have some information.
 
@@ -56,13 +63,13 @@ kuard         kuard-857f95f9df-99x87                                1/1     Runn
 Run `kubectl get nodes` and you should have 3 controlplane and 3 worker nodes.
 
 ```
-NAME                          STATUS   ROLES                  AGE   VERSION
-ip-10-0-155-27.ec2.internal   Ready    control-plane,master   11m   v1.22.2
-ip-10-0-254-40.ec2.internal   Ready    control-plane,master   12m   v1.22.2
-ip-10-0-69-120.ec2.internal   Ready    <none>                 12m   v1.22.2
-ip-10-0-71-144.ec2.internal   Ready    control-plane,master   10m   v1.22.2
-ip-10-0-77-205.ec2.internal   Ready    <none>                 12m   v1.22.2
-ip-10-0-85-76.ec2.internal    Ready    <none>                 12m   v1.22.2
+NAME                                      STATUS   ROLES                         AGE     VERSION
+my-cluster-3192150395-control-plane-h4c2q   Ready    control-plane,master          12m     v1.22.2
+my-cluster-3192150395-control-plane-l28qr   Ready    control-plane,master          10m     v1.22.2
+my-cluster-3192150395-control-plane-z4h7j   Ready    control-plane,master          7m39s   v1.22.2
+my-cluster-3192150395-md-0-gkq5n            Ready    worker                        10m     v1.22.2
+my-cluster-3192150395-md-0-gvjdv            Ready    worker                        10m     v1.22.2
+my-cluster-3192150395-md-0-wql7z            Ready    worker                        10m     v1.22.2
 ```
 
 # Verifying Installation
@@ -148,9 +155,9 @@ pod/nginx-6799fc88d8-77tmk   1/1     Running   0          59s
 To delete your cluster just run the following.
 
 ```shell
-gokp delete-cluster aws \
+gokp delete-cluster azure \
 --cluster-name=$MYCLUSTER \
 --kubeconfig=/home/chernand/.gokp/$MYCLUSTER/$MYCLUSTER.kubeconfig
 ```
 
-This will delete your cluster running in AWS. It does not delete the repo that was created, so you will have to do that yourself.
+This will delete your cluster running in Azure. It does not delete the repo that was created, so you will have to do that yourself.
