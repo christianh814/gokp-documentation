@@ -33,12 +33,12 @@ If you don't want to build you can download binary
 **Linux**
 
 ```
-sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v0.0.7-1/gokp-amd64-linux
+sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v0.0.8/gokp-amd64-linux
 ```
 
 **Mac OS x86_64**
 ```
-sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v0.0.7-1/gokp-amd64-darwin
+sudo wget -O /usr/local/bin/gokp https://github.com/christianh814/gokp/releases/download/v0.0.8/gokp-amd64-darwin
 ```
 
 Make sure to make it executable
